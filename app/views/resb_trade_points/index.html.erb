@@ -1,0 +1,39 @@
+<h2><%= l(:label_resb_trade_points_plural) %></h2>
+
+<style>
+  .resb-tp-red-line td {
+    background-color: #ffe7e7;
+  }
+</style>
+
+<div id="resb-trade-points">
+  <% if @trade_points.present? %>
+    <table class="list">
+      <tr>
+        <th><%= l(:field_resb_trade_point_name) %></th>
+        <th><%= l(:field_resb_trade_point_address) %></th>
+        <th><%= l(:field_resb_trade_point_department) %></th>
+      </tr>
+
+      <% @trade_points.each do |tp| %>
+        <tr id="resb-tp-<%= tp.id %>"<%= ' class="resb-tp-red-line"'.html_safe if tp.department_id.blank? %>>
+          <td>
+            <%= tp.name %>
+          </td>
+          <td>
+            <%= tp.address %>
+          </td>
+          <td>
+            <%= link_to "<span>#{tp.department.present? ? tp.department.name : "<< #{l(:label_resb_tp_department_undefined)} >>"}</span>".html_safe,
+                        edit_resb_trade_point_path(tp),
+                        class: 'acl_ajax_edit in_link no_line',
+                        data: { width: '600px' }
+            %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  <% else %>
+    <div class="nodata"><%= l(:label_no_data) %></div>
+  <% end %>
+</div>

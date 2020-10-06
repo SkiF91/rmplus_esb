@@ -1,0 +1,12 @@
+$('#resb-tp-<%= @trade_point.id %>').find('td:last').html('<%= link_to "<span>#{@trade_point.department.present? ? @trade_point.department.name : "<< #{l(:label_resb_tp_department_undefined)} >>"}</span>".html_safe,
+                                                                       edit_resb_trade_point_path(@trade_point),
+                                                                       class: 'acl_ajax_edit in_link no_line',
+                                                                       data: { width: '600px' }
+                                                           %>');
+<% if @trade_point.department.present? %>
+  $('#resb-tp-<%= @trade_point.id %>').removeClass('resb-tp-red-line');
+<% else %>
+  $('#resb-tp-<%= @trade_point.id %>').addClass('resb-tp-red-line');
+<% end %>
+
+$('.modal').modal('hide');

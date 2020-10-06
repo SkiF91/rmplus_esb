@@ -1,0 +1,26 @@
+<%= form_for(@trade_point, remote: true) do |f| %>
+  <div class="modal-header">
+    <h3><%= @trade_point.name %></h3>
+  </div>
+  <div class="modal-body">
+    <%
+      scope = UserDepartment.joins(:node)
+                           .order("#{UserDepartmentTree.table_name}.lft")
+                           .where("#{UserDepartment.table_name}.locked is null or #{UserDepartment.table_name}.locked = ? or #{UserDepartment.table_name}.id = ?", false, @trade_point.department_id.to_i)
+
+      deps = []
+      UserDepartmentTree.each_with_level(scope) do |it, level|
+        deps << ["#{'-' * level} #{it.name}", it.id]
+      end
+    %>
+    <%= select_tag 'trade_point[department_id]', options_for_select(deps, @trade_point.department_id), include_blank: true %>
+  </div>
+  <div class="modal-footer">
+    <%= button_tag "<span>#{l(:button_save)}</span>".html_safe, class: 'acl-btn-flat acl-btn-flat-green rm-icon fa-save' %>
+    <%= button_tag "<span>#{l(:button_close_window)}</span>".html_safe, type: 'button', class: 'acl-btn-flat rm-icon fa-sign-out', 'data-dismiss' => 'modal', 'aria-hidden' => 'true' %>
+  </div>
+<% end %>
+
+<script type="text/javascript" charset="utf-8">
+  $('#trade_point_department_id').select2({ allowClear: true, placeholder: '<%= l(:field_department) %>', width: 500 });
+</script>

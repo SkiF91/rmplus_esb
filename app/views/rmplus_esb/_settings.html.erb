@@ -1,0 +1,71 @@
+<table class="plugin_settings">
+  <tr>
+    <td>
+      <label for="settings_trade_point_custom_indicator_id"><%= l(:settings_resb_trade_point_custom_indicator_id) %></label>
+    </td>
+    <td>
+      <%= select_tag 'settings[trade_point_custom_indicator_id]', options_for_select(KpiCustomIndicator.order(:name).map { |ci| [ci.name, ci.id] }, @settings['trade_point_custom_indicator_id']), include_blank: true, class: 'select2' %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <label for="settings_employee_custom_indicator_id"><%= l(:settings_resb_employee_custom_indicator_id) %></label>
+    </td>
+    <td>
+      <%= select_tag 'settings[employee_custom_indicator_id]', options_for_select(KpiCustomIndicator.order(:name).map { |ci| [ci.name, ci.id] }, @settings['employee_custom_indicator_id']), include_blank: true, class: 'select2' %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <label for="settings_payslip_password"><%= l(:settings_resb_payslip_password) %></label>
+    </td>
+    <td>
+      <%= password_field_tag('settings[payslip_password]',  @settings['payslip_password']) %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <label for="settings_payslip_password"><%= l(:settings_resb_attachment_vacation_path) %></label>
+    </td>
+    <td>
+      <%= text_field_tag('settings[attachment_vacation_path]',  @settings['attachment_vacation_path']) %>
+    </td>
+  </tr>
+
+  <tr class="rmp-settings-group">
+    <td></td>
+    <td>
+      ESB
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <label for="settings_esb_url"><%= l(:settings_resb_esb_url) %></label>
+    </td>
+    <td>
+      <%= text_field_tag 'settings[esb_url]', @settings['esb_url'] %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <label for="settings_esb_app_id"><%= l(:settings_resb_esb_app_id) %></label>
+    </td>
+    <td>
+      <%= text_field_tag 'settings[esb_app_id]', @settings['esb_app_id'] %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <label for="settings_esb_token"><%= l(:settings_resb_esb_token) %></label>
+    </td>
+    <td>
+      <%= text_field_tag 'settings[esb_token]', @settings['esb_token'] %>
+    </td>
+  </tr>
+
+
+  <tr>
+    <td></td>
+    <td id="settings_save_button"></td>
+  </tr>
+</table>

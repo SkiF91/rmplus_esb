@@ -1,0 +1,1 @@
+gem 'seven_zip_ruby', '>=1.2.5'
